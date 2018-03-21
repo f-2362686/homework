@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>慕课网2015课程学习情况</title>
+		<style type="text/css">
+			body{
+				margin:0;
+				padding:0;
+			}
+			.component{
+				width: 50%;
+				height: 50px;
+				margin-bottom: 20px;
+				background-color: #eee;
+				display: none;
+			}
+		</style>
+		<script type="text/javascript" src="../js/lib/jquery.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery.fullPage.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#h5').fullpage({
+					'sectionsColor':['red','blue','green'],
+					onLeave:function(index,nextIndex,direction){
+						$('#h5').find('.page').eq(index-1).trigger('onLeave');
+					},
+					afterLoad:function(anchorLink,index){ 
+						$('#h5').find('.page').eq(index-1).trigger('onLoad');
+					}
+				});
+				$('.page').on('onLeave',function(){       //jQuery的事件on(events[,selector][,data],handler)
+					console.log($(this).attr('id') ,'===>' , 'onleave' );  
+					$(this).find('.component').trigger('onleave');  //triggerHandler触发特定的事件，作用是在page上遍历component元素，然后触发事件。
+				})
+				$('.page').on('onLoad',function(){
+					console.log($(this).attr('id') ,'===>' , 'onLoad' );
+					$(this).find('.component').trigger('onLoad');
+				})
+				$('.component').on('onLoad',function(){
+					$(this).fadeIn();
+					return false;
+			    })
+			    $('.component').on('onLeave',function(){
+					$(this).fadeOut();
+					return false;
+			    })
+			})
+		</script>
+	</head>
+	<body>
+		<!--用于验证 fullpage.js切换页面，以及内容组织结构可用，组建能够进行动画。-->
+	</body>
+	<div id="h5">
+		<div class="page section" id="page-1">
+			<div class="component logo">logo</div>
+			<div class="component slogan">slogan</div>
+		</div>
+		<div class="page section" id="page-2">
+			<div class="component desc">desc</div>
+		</div>
+		<div class="page section" id="page-3">
+			<div class="component bar">bar</div>
+		</div>
+	</div>
+</html>

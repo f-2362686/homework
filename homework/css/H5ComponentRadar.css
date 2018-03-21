@@ -1,0 +1,29 @@
+/* 折线图组件样式 */
+.h5_component_radar{
+}
+.h5_component_radar canvas{
+	position: absolute;
+	left:0;
+	top:0;  /*用canvas做动画，会进行分层，需要z-index*/
+	width:100%;
+	height:100%;
+	/*background-color: #eee;*/
+}
+.h5_component_radar .text{
+	position: absolute;
+	font-size: 12px;
+	width: 12px;
+	text-align: center;
+	bottom:-20px;
+	height: 20px;
+	line-height: 20px;
+/*	-webkit-transition:all 1s 1s;
+	opacity: 0;*/
+
+}
+/*.h5_component_radar_load .text{
+	opacity: 1;
+}
+.h5_component_radar_leave .text{
+	opacity: 0;
+}*/
